@@ -103,64 +103,48 @@
 		<td><input type="checkbox" id="checkbox8"></td>
         </tr>
     </table>
-
-    <script>
-        // Load saved checkbox states from cookies
-        window.onload = function() {
-            loadCheckboxStates();
-        };
-
-        // Save checkbox states to cookies
-        window.onbeforeunload = function() {
-            saveCheckboxStates();
-        };
-
-        function loadCheckboxStates() {
-            var todo1Checked = localStorage.getItem('todo-1');
-            if (todo1Checked) {
-                document.getElementById('todo-1').checked = JSON.parse(todo1Checked);
-            }
-            var todo2Checked = localStorage.getItem('todo-2');
-            if (todo2Checked) {
-                document.getElementById('todo-2').checked = JSON.parse(todo2Checked);
-            }
-			var todo1Checked = localStorage.getItem('todo-3');
-            if (todo1Checked) {
-                document.getElementById('todo-3').checked = JSON.parse(todo1Checked);
-            }
-			var todo1Checked = localStorage.getItem('todo-4');
-            if (todo1Checked) {
-                document.getElementById('todo-4').checked = JSON.parse(todo1Checked);
-            }
-			var todo1Checked = localStorage.getItem('todo-5');
-            if (todo1Checked) {
-                document.getElementById('todo-5').checked = JSON.parse(todo1Checked);
-            }
-			var todo1Checked = localStorage.getItem('todo-6');
-            if (todo1Checked) {
-                document.getElementById('todo-6').checked = JSON.parse(todo1Checked);
-            }
-			var todo1Checked = localStorage.getItem('todo-7');
-            if (todo1Checked) {
-                document.getElementById('todo-7').checked = JSON.parse(todo1Checked);
-            }
-			var todo1Checked = localStorage.getItem('todo-8');
-            if (todo1Checked) {
-                document.getElementById('todo-8').checked = JSON.parse(todo1Checked);
-            }
-        }
-
+	
+	<button onclick="saveCheckboxStates()">Save</button>
+    
+<script>
         function saveCheckboxStates() {
-            localStorage.setItem('todo-1', document.getElementById('todo-1').checked);
-            localStorage.setItem('todo-2', document.getElementById('todo-2').checked);
-			localStorage.setItem('todo-3', document.getElementById('todo-3').checked);
-			localStorage.setItem('todo-4', document.getElementById('todo-4').checked);
-			localStorage.setItem('todo-5', document.getElementById('todo-5').checked);
-			localStorage.setItem('todo-6', document.getElementById('todo-6').checked);
-			localStorage.setItem('todo-7', document.getElementById('todo-7').checked);
-			localStorage.setItem('todo-8', document.getElementById('todo-8').checked);
-        }
+    const checkboxStates = {
+        checkbox1: document.getElementById("checkbox1").checked,
+        checkbox2: document.getElementById("checkbox2").checked,
+        checkbox3: document.getElementById("checkbox3").checked,
+        checkbox4: document.getElementById("checkbox4").checked,
+        checkbox5: document.getElementById("checkbox5").checked,
+    };
 
+    // Your GitHub API logic here
+    console.log('Checkbox states:', checkboxStates);
+}
+		// Function to reset checkboxes at 00:00 GMT+7
+function resetCheckboxes() {
+    const now = new Date();
+    const currentTime = now.getTime(); // Current time in milliseconds
+    const timezoneOffset = 7 * 60 * 60 * 1000; // Offset for GMT+7 in milliseconds
+    const resetTime = new Date(currentTime + timezoneOffset); // Reset time in GMT+7
+
+    // Calculate time until next reset (00:00 GMT+7)
+    const timeUntilReset = new Date(resetTime);
+    timeUntilReset.setHours(0, 0, 0, 0);
+    timeUntilReset.setDate(timeUntilReset.getDate() + 1);
+    timeUntilReset -= currentTime;
+
+    // Set timeout to reset checkboxes at the next reset time
+    setTimeout(function() {
+        // Reset checkboxes here
+        console.log('Resetting checkboxes...');
+        resetCheckboxes();
+    }, timeUntilReset);
+}
+
+// Start the reset process
+resetCheckboxes();
+</script>
+
+	<script>
         function updateTime() {
             var now = new Date();
             var hours = now.getHours();
