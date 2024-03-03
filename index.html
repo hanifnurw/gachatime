@@ -28,7 +28,7 @@
             cursor: pointer;
         }
     </style>
-	<style>
+    <style>
         /* Style to make the image smaller */
         .small-img {
             width: 50px; /* Adjust the width as needed */
@@ -43,108 +43,112 @@
     </div>
     <table>
         <tr>
-        	<th>Image</th>
-		<th>Time</th>
-        	<th>Reset Time</th>
-            	<th>Time Left to Reset</th>
-            	<th>ToDo List</th>
-	    	<th>Image</th>
-	    	<th>Time</th>
-            	<th>Reset Time</th>
-            	<th>Time Left to Reset</th>
-            	<th>ToDo List</th>
+            <th>Image</th>
+            <th>Time</th>
+            <th>Reset Time</th>
+            <th>Time Left to Reset</th>
+            <th>ToDo List</th>
+            <th>Image</th>
+            <th>Time</th>
+            <th>Reset Time</th>
+            <th>Time Left to Reset</th>
+            <th>ToDo List</th>
         </tr>
         <tr>
-            	<th><img src="BlueArchive.ico" alt="Blue Archive" class="small-img"></th>		
-            	<td>Blue Archive</td>
-            	<td>02:00</td>
-            	<td id="time-left-BlueArchive"></td>
-            	<td><input type="checkbox" id="checkbox1"></td>
-	    	<th><img src="FGO.ico" alt="FGO" class="small-img"></th>
-            	<td>FGO</td>
-            	<td>11:00</td>
-            	<td id="time-left-FGO"></td>
-	    	<td><input type="checkbox" id="checkbox5"></td>
+            <th><img src="BlueArchive.ico" alt="Blue Archive" class="small-img"></th>       
+            <td>Blue Archive</td>
+            <td>02:00</td>
+            <td id="time-left-BlueArchive"></td>
+            <td><input type="checkbox" id="checkbox1"></td>
+            <th><img src="FGO.ico" alt="FGO" class="small-img"></th>
+            <td>FGO</td>
+            <td>11:00</td>
+            <td id="time-left-FGO"></td>
+            <td><input type="checkbox" id="checkbox5"></td>
         </tr>
-		<tr>
-        	<th><img src="Nikke.ico" alt="Nikke" class="small-img"></th>
-            	<td>Nikke</td>
-            	<td>03:00</td>
-            	<td id="time-left-Nikke"></td>
-	    	<td><input type="checkbox" id="checkbox2"></td>
-	    	<th><img src="PGR.ico" alt="PGR" class="small-img"></th>
-            	<td>PGR</td>
-            	<td>14:00</td>
-            	<td id="time-left-PGR"></td>
-	    	<td><input type="checkbox" id="checkbox6"></td>
+        <tr>
+            <th><img src="Nikke.ico" alt="Nikke" class="small-img"></th>
+            <td>Nikke</td>
+            <td>03:00</td>
+            <td id="time-left-Nikke"></td>
+            <td><input type="checkbox" id="checkbox2"></td>
+            <th><img src="PGR.ico" alt="PGR" class="small-img"></th>
+            <td>PGR</td>
+            <td>14:00</td>
+            <td id="time-left-PGR"></td>
+            <td><input type="checkbox" id="checkbox6"></td>
         </tr>
-		<tr>
-	    	<th><img src="SnowBreak.ico" alt="SnowBreak" class="small-img"></th>
-            	<td>SnowBreak</td>
-            	<td>03:00</td>
-            	<td id="time-left-SnowBreak"></td>
-		<td><input type="checkbox" id="checkbox3"></td>
-		<th><img src="Arknight.ico" alt="Arknight" class="small-img"></th>
-            	<td>Arknight</td>
-            	<td>18:00</td>
-            	<td id="time-left-Arknight"></td>
-		<td><input type="checkbox" id="checkbox7"></td>
+        <tr>
+            <th><img src="SnowBreak.ico" alt="SnowBreak" class="small-img"></th>
+            <td>SnowBreak</td>
+            <td>03:00</td>
+            <td id="time-left-SnowBreak"></td>
+            <td><input type="checkbox" id="checkbox3"></td>
+            <th><img src="Arknight.ico" alt="Arknight" class="small-img"></th>
+            <td>Arknight</td>
+            <td>18:00</td>
+            <td id="time-left-Arknight"></td>
+            <td><input type="checkbox" id="checkbox7"></td>
         </tr>
-		<tr>
-		<th><img src="CounterSide.ico" alt="CounterSide" class="small-img"></th>
-            	<td>CounterSide</td>
-            	<td>04:00</td>
-            	<td id="time-left-CounterSide"></td>
-		<td><input type="checkbox" id="checkbox4"></td>
-		<th><img src="AetherGazer.ico" alt="Aether Gazer" class="small-img"></th>
-            	<td>Aether Gazer</td>
-            	<td>19:00</td>
-            	<td id="time-left-AetherGazer"></td>
-		<td><input type="checkbox" id="checkbox8"></td>
+        <tr>
+            <th><img src="CounterSide.ico" alt="CounterSide" class="small-img"></th>
+            <td>CounterSide</td>
+            <td>04:00</td>
+            <td id="time-left-CounterSide"></td>
+            <td><input type="checkbox" id="checkbox4"></td>
+            <th><img src="AetherGazer.ico" alt="Aether Gazer" class="small-img"></th>
+            <td>Aether Gazer</td>
+            <td>19:00</td>
+            <td id="time-left-AetherGazer"></td>
+            <td><input type="checkbox" id="checkbox8"></td>
         </tr>
     </table>
-	
-	<button onclick="saveCheckboxStates()">Save</button>
     
-<script>
+    <button onclick="saveCheckboxStates()">Save</button>
+
+    <script>
         function saveCheckboxStates() {
-    const checkboxStates = {
-        checkbox1: document.getElementById("checkbox1").checked,
-        checkbox2: document.getElementById("checkbox2").checked,
-        checkbox3: document.getElementById("checkbox3").checked,
-        checkbox4: document.getElementById("checkbox4").checked,
-        checkbox5: document.getElementById("checkbox5").checked,
-    };
+            const checkboxStates = {
+                checkbox1: document.getElementById("checkbox1").checked,
+                checkbox2: document.getElementById("checkbox2").checked,
+                checkbox3: document.getElementById("checkbox3").checked,
+                checkbox4: document.getElementById("checkbox4").checked,
+                checkbox5: document.getElementById("checkbox5").checked,
+                checkbox6: document.getElementById("checkbox6").checked,
+                checkbox7: document.getElementById("checkbox7").checked,
+                checkbox8: document.getElementById("checkbox8").checked,
+            };
 
-    // Your GitHub API logic here
-    console.log('Checkbox states:', checkboxStates);
-}
-		// Function to reset checkboxes at 00:00 GMT+7
-function resetCheckboxes() {
-    const now = new Date();
-    const currentTime = now.getTime(); // Current time in milliseconds
-    const timezoneOffset = 7 * 60 * 60 * 1000; // Offset for GMT+7 in milliseconds
-    const resetTime = new Date(currentTime + timezoneOffset); // Reset time in GMT+7
+            const accessToken = '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';
+            const repoOwner = 'hanifnurw';
+            const repoName = 'gachatime';
+            const filePath = 'path/to/GachaCheckBox.json'; // File path to save checkbox states
 
-    // Calculate time until next reset (00:00 GMT+7)
-    const timeUntilReset = new Date(resetTime);
-    timeUntilReset.setHours(0, 0, 0, 0);
-    timeUntilReset.setDate(timeUntilReset.getDate() + 1);
-    timeUntilReset -= currentTime;
+            const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+            fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                    'Authorization': `token ${accessToken}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    message: 'Update checkbox states',
+                    content: btoa(JSON.stringify(checkboxStates)) // Encode content to base64
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Checkbox states saved successfully!');
+                } else {
+                    alert('Failed to save checkbox states.');
+                    console.error('Error:', response.statusText);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
 
-    // Set timeout to reset checkboxes at the next reset time
-    setTimeout(function() {
-        // Reset checkboxes here
-        console.log('Resetting checkboxes...');
-        resetCheckboxes();
-    }, timeUntilReset);
-}
-
-// Start the reset process
-resetCheckboxes();
-</script>
-
-	<script>
         function updateTime() {
             var now = new Date();
             var hours = now.getHours();
@@ -162,7 +166,7 @@ resetCheckboxes();
             var timeDifferenceBlueArchive = resetTimeBlueArchive.getTime() - now.getTime();
             setTimeLeft("time-left-BlueArchive", timeDifferenceBlueArchive);
 
-			// For Nikke
+            // For Nikke
             var resetTimeNikke = new Date();
             resetTimeNikke.setHours(3, 0, 0, 0); // Set to 11:00 AM
             if (resetTimeNikke < now) {
@@ -171,7 +175,7 @@ resetCheckboxes();
             var timeDifferenceNikke = resetTimeNikke.getTime() - now.getTime();
             setTimeLeft("time-left-Nikke", timeDifferenceNikke);
 
-			// For SnowBreak
+            // For SnowBreak
             var resetTimeSnowBreak = new Date();
             resetTimeSnowBreak.setHours(3, 0, 0, 0); // Set to 11:00 AM
             if (resetTimeSnowBreak < now) {
@@ -180,7 +184,7 @@ resetCheckboxes();
             var timeDifferenceSnowBreak = resetTimeSnowBreak.getTime() - now.getTime();
             setTimeLeft("time-left-SnowBreak", timeDifferenceSnowBreak);
 
-			// For CounterSide
+            // For CounterSide
             var resetTimeCounterSide = new Date();
             resetTimeCounterSide.setHours(4, 0, 0, 0); // Set to 11:00 AM
             if (resetTimeCounterSide < now) {
@@ -189,7 +193,7 @@ resetCheckboxes();
             var timeDifferenceCounterSide = resetTimeCounterSide.getTime() - now.getTime();
             setTimeLeft("time-left-CounterSide", timeDifferenceCounterSide);
 
-			// For FGO
+            // For FGO
             var resetTimeFGO = new Date();
             resetTimeFGO.setHours(11, 0, 0, 0); // Set to 11:00 AM
             if (resetTimeFGO < now) {
@@ -198,7 +202,7 @@ resetCheckboxes();
             var timeDifferenceFGO = resetTimeFGO.getTime() - now.getTime();
             setTimeLeft("time-left-FGO", timeDifferenceFGO);
 
-			// For PGR
+            // For PGR
             var resetTimePGR = new Date();
             resetTimePGR.setHours(14, 0, 0, 0); // Set to 11:00 AM
             if (resetTimePGR < now) {
@@ -206,8 +210,8 @@ resetCheckboxes();
             }
             var timeDifferencePGR = resetTimePGR.getTime() - now.getTime();
             setTimeLeft("time-left-PGR", timeDifferenceCounterSide);
-			
-			// For Arknight
+            
+            // For Arknight
             var resetTimeArknight = new Date();
             resetTimeArknight.setHours(18, 0, 0, 0); // Set to 11:00 AM
             if (resetTimeArknight < now) {
