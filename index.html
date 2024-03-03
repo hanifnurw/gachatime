@@ -116,42 +116,49 @@
                 checkbox5: document.getElementById("checkbox5").checked,
                 checkbox6: document.getElementById("checkbox6").checked,
                 checkbox7: document.getElementById("checkbox7").checked,
-                checkbox8: document.getElementById("checkbox8").checked,
-            };
-            
-            const now = new Date();
-            const gmt7Midnight = new Date(now.getTime() + (3600000 * 7)); // Convert local time to GMT+7
-            gmt7Midnight.setHours(0, 0, 0, 0); // Set time to 00:00:00 GMT+7
-
-            // Calculate the time difference between now and 00:00 GMT+7
-            const timeUntilMidnight = gmt7Midnight.getTime() - now.getTime();
-
-            // Schedule the function to run again at 00:00 GMT+7
-            setTimeout(saveCheckboxStates, timeUntilMidnight);
+                checkbox8: document.getElementById("checkbox8").checked
+            }
 
             const accessToken = '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';
             const repoOwner = 'hanifnurw';
             const repoName = 'gachatime';
-            const filePath = 'path/to/gachacheckbox.json'; // File path to save checkbox states
+            const filePath = 'checkbox_states.json'; // File path to save checkbox states
             
-            const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
+             const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
             fetch(apiUrl, {
-                method: 'PUT',
+                method: 'GET',
                 headers: {
                     'Authorization': `token ${accessToken}`,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: 'Update checkbox states',
-                    content: btoa(JSON.stringify(checkboxStates)) // Encode content to base64
-                })
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const fileContent = atob(data.content);
+                const jsonContent = JSON.parse(fileContent);
+                // Update the JSON content with checkbox states
+                Object.keys(checkboxStates).forEach(key => {
+                    jsonContent[key] = checkboxStates[key];
+                });
+
+                // Upload updated content back to GitHub
+                return fetch(apiUrl, {
+                    method: 'PUT',
+                    headers: {
+                        'Authorization': `token ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        message: 'Update checkbox states',
+                        content: btoa(JSON.stringify(jsonContent)),
+                        sha: data.sha,
+                    })
+                });
             })
             .then(response => {
                 if (response.ok) {
-                    alert('Checkbox states saved successfully!');
+                    console.log('Checkbox states saved successfully!');
                 } else {
-                    alert('Failed to save checkbox states.');
-                    console.error('Error:', response.statusText);
+                    console.error('Failed to save checkbox states:', response.statusText);
                 }
             })
             .catch(error => {
@@ -159,7 +166,6 @@
             });
         }
         
-
         function updateTime() {
             var now = new Date();
             var hours = now.getHours();
