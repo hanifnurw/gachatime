@@ -104,68 +104,60 @@
         </tr>
     </table>
     
-    <button onclick="saveCheckboxStates()">Save</button>
+    // Load saved checkbox states from cookies
+        window.onload = function() {
+            loadCheckboxStates();
+        };
 
-    <script>
-        function saveCheckboxStates() {
-            const checkboxStates = {
-                checkbox1: document.getElementById("checkbox1").checked,
-                checkbox2: document.getElementById("checkbox2").checked,
-                checkbox3: document.getElementById("checkbox3").checked,
-                checkbox4: document.getElementById("checkbox4").checked,
-                checkbox5: document.getElementById("checkbox5").checked,
-                checkbox6: document.getElementById("checkbox6").checked,
-                checkbox7: document.getElementById("checkbox7").checked,
-                checkbox8: document.getElementById("checkbox8").checked
-            }
+        // Save checkbox states to cookies
+        window.onbeforeunload = function() {
+            saveCheckboxStates();
+        };
 
-            const accessToken = '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';
-            const repoOwner = 'hanifnurw';
-            const repoName = 'gachatime';
-            const filePath = 'checkbox_states.json'; // File path to save checkbox states
-            
-             const apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/contents/${filePath}`;
-            fetch(apiUrl, {
-                method: 'GET',
-                headers: {
-                    'Authorization': `token ${accessToken}`,
+         function loadCheckboxStates() {
+            // Load checkbox states from localStorage
+            var checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach(function(checkbox) {
+                var checkboxId = checkbox.id;
+                var isChecked = localStorage.getItem(checkboxId);
+                if (isChecked) {
+                    checkbox.checked = JSON.parse(isChecked);
                 }
-            })
-            .then(response => response.json())
-            .then(data => {
-                const fileContent = atob(data.content);
-                const jsonContent = JSON.parse(fileContent);
-                // Update the JSON content with checkbox states
-                Object.keys(checkboxStates).forEach(key => {
-                    jsonContent[key] = checkboxStates[key];
-                });
-
-                // Upload updated content back to GitHub
-                return fetch(apiUrl, {
-                    method: 'PUT',
-                    headers: {
-                        'Authorization': `token ${accessToken}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: 'Update checkbox states',
-                        content: btoa(JSON.stringify(jsonContent)),
-                        sha: data.sha,
-                    })
-                });
-            })
-            .then(response => {
-                if (response.ok) {
-                    console.log('Checkbox states saved successfully!');
-                } else {
-                    console.error('Failed to save checkbox states:', response.statusText);
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
             });
         }
-        
+		
+        function saveCheckboxStates() {
+            // Save checkbox states to localStorage
+            var checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach(function(checkbox) {
+                localStorage.setItem(checkbox.id, checkbox.checked);
+            });
+        }
+
+		function updateTimeAndResetCheckboxes() {
+            var now = new Date();
+            var gmtPlus7Time = new Date(now.getTime() + (7 * 60 * 60 * 1000)); // Convert to GMT+7 time
+            var hours = gmtPlus7Time.getUTCHours();
+            var minutes = gmtPlus7Time.getUTCMinutes();
+
+            if (hours === 0 && minutes === 0) {
+                // Reset checkboxes if it's 00:00 GMT+7
+                resetCheckboxes();
+            }
+
+            // Update time display
+            updateTime();
+        }
+
+		function resetCheckboxes() {
+            // Reset all checkboxes to unchecked state
+            var checkboxes = document.querySelectorAll('.checkbox');
+            checkboxes.forEach(function(checkbox) {
+                checkbox.checked = false;
+                localStorage.removeItem(checkbox.id); // Remove checkbox state from localStorage
+            });
+        }
+    
         function updateTime() {
             var now = new Date();
             var hours = now.getHours();
