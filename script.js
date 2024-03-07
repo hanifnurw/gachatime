@@ -34,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function() {
 
     // Load checkbox state from GitHub issue
     function loadCheckboxState() {
-        var token = "YOUR_GITHUB_ACCESS_TOKEN"; // Ganti dengan token akses GitHub Anda
-        var repoOwner = "YOUR_USERNAME"; // Ganti dengan nama pengguna Anda
-        var repoName = "YOUR_REPOSITORY_NAME"; // Ganti dengan nama repositori Anda
+        var token = "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"; // Ganti dengan token akses GitHub Anda
+        var repoOwner = "hanifnurw"; // Ganti dengan nama pengguna Anda
+        var repoName = "gachatime"; // Ganti dengan nama repositori Anda
 
         var apiUrl = `https://api.github.com/repos/${repoOwner}/${repoName}/issues`;
 
