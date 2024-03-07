@@ -1,33 +1,11 @@
-<!DOCTYPE html>
+<html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gacha Time</title>
     <style>
-        table {
-            border-collapse: collapse;
-            width: 500px;
-            margin: 50px auto;
-        }
-        th, td {
-            border: 1px solid black;
-            padding: 8px;
-            text-align: center;
-        }
-        .time-box {
-            border: 1px solid black;
-            padding: 10px;
-            width: 150px;
-            margin: 0 auto;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-        }
-        .checkbox {
-            cursor: pointer;
-        }
-    </style>
+        <link rel="stylesheet" href="styles.css">
 	<style>
         /* Style to make the image smaller */
         .small-img {
@@ -62,13 +40,13 @@
             <td>02:00</td>
             <td id="time-left-BlueArchive"></td>
 			<th>17:00</th>
-            <td><input type="checkbox" class="checkbox" id="todo-1"></td>
+            <td><input type="checkbox" id="complete-checkbox"></td>
 			<th><img src="FGO.ico" alt="FGO" class="small-img"></th>
             <td>FGO</td>
             <td>11:00</td>
             <td id="time-left-FGO"></td>
 			<th>No</th>
-			<td><input type="checkbox" class="checkbox" id="todo-5"></td>
+			<td><input type="checkbox" id="complete-checkbox"></td>
         </tr>
 		<tr>
             <th><img src="Nikke.ico" alt="Nikke" class="small-img"></th>
@@ -76,13 +54,13 @@
             <td>03:00</td>
             <td id="time-left-Nikke"></td>
 			<th>17:00</th>
-			<td><input type="checkbox" class="checkbox" id="todo-2"></td>
+			<td><input type="checkbox" id="complete-checkbox"></td>
 			<th><img src="PGR.ico" alt="PGR" class="small-img"></th>
             <td>PGR</td>
             <td>14:00</td>
             <td id="time-left-PGR"></td>
 			<th>No</th>
-			<td><input type="checkbox" class="checkbox" id="todo-6"></td>
+			<td><input type="checkbox" id="complete-checkbox"></td>
         </tr>
 		<tr>
 		    <th><img src="SnowBreak.ico" alt="SnowBreak" class="small-img"></th>
@@ -90,13 +68,13 @@
             <td>03:00</td>
             <td id="time-left-SnowBreak"></td>
 			<th>No</th>
-			<td><input type="checkbox" class="checkbox" id="todo-3"></td>
+			<td><input type="checkbox" id="complete-checkbox"></td>
 		    <th><img src="Arknight.ico" alt="Arknight" class="small-img"></th>
             <td>Arknight</td>
             <td>18:00</td>
             <td id="time-left-Arknight"></td>
 			<th>18:00</th>
-			<td><input type="checkbox" class="checkbox" id="todo-7"></td>
+			<td><input type="checkbox" id="complete-checkbox"></td>
         </tr>
 		<tr>
 		    <th><img src="CounterSide.ico" alt="CounterSide" class="small-img"></th>
@@ -104,70 +82,17 @@
             <td>04:00</td>
             <td id="time-left-CounterSide"></td>
 			<th>17:00</th>
-			<td><input type="checkbox" class="checkbox" id="todo-4"></td>
+			<td><input type="checkbox" id="complete-checkbox"></td>
 		    <th><img src="AetherGazer.ico" alt="Aether Gazer" class="small-img"></th>
             <td>Aether Gazer</td>
             <td>19:00</td>
             <td id="time-left-AetherGazer"></td>
 			<th>19:00</th>
-			<td><input type="checkbox" class="checkbox" id="todo-8"></td>
+			<td><input type="checkbox" id="complete-checkbox"></td>
         </tr>
     </table>
 
     <script>
-        // Load saved checkbox states from cookies
-        window.onload = function() {
-            loadCheckboxStates();
-        };
-
-        // Save checkbox states to cookies
-        window.onbeforeunload = function() {
-            saveCheckboxStates();
-        };
-
-         function loadCheckboxStates() {
-            // Load checkbox states from localStorage
-            var checkboxes = document.querySelectorAll('.checkbox');
-            checkboxes.forEach(function(checkbox) {
-                var checkboxId = checkbox.id;
-                var isChecked = localStorage.getItem(checkboxId);
-                if (isChecked) {
-                    checkbox.checked = JSON.parse(isChecked);
-                }
-            });
-        }
-		
-        function saveCheckboxStates() {
-            // Save checkbox states to localStorage
-            var checkboxes = document.querySelectorAll('.checkbox');
-            checkboxes.forEach(function(checkbox) {
-                localStorage.setItem(checkbox.id, checkbox.checked);
-            });
-        }
-
-		function updateTimeAndResetCheckboxes() {
-            var now = new Date();
-            var gmtPlus7Time = new Date(now.getTime() + (7 * 60 * 60 * 1000)); // Convert to GMT+7 time
-            var hours = gmtPlus7Time.getUTCHours();
-            var minutes = gmtPlus7Time.getUTCMinutes();
-
-            if (hours === 0 && minutes === 0) {
-                // Reset checkboxes if it's 00:00 GMT+7
-                resetCheckboxes();
-            }
-
-            // Update time display
-            updateTime();
-        }
-
-		function resetCheckboxes() {
-            // Reset all checkboxes to unchecked state
-            var checkboxes = document.querySelectorAll('.checkbox');
-            checkboxes.forEach(function(checkbox) {
-                checkbox.checked = false;
-                localStorage.removeItem(checkbox.id); // Remove checkbox state from localStorage
-            });
-        }
 
         function updateTime() {
             var now = new Date();
